@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Edit Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+             {% for f in form %}
+              {{f.label_tag}}     {{f}} {{f.errors|striptags}} <br> <br>
+             {% endfor %}
+         <input class="btn" type="submit" value="submit">
+    </form>  
+
+
+ {% if user.is_authenticated %}
+    {% comment %} {% if user.id == user.userprofile.id %} {% endcomment %}
+        <a style="margin:5px;" href="../deleteProfile/{{user.id}}" >Delete</a>
+    {% comment %} {% endif %} {% endcomment %}
+ {% endif %}
+
+{% endblock content %}
