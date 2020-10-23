@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>inoware</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Welcome to inoware</h1>
+            </header>
+        </div>
+   
+        {% block content %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="alert alert-danger" role = "alert">
+                            {{message}}
+                        </div>
+                    {% endif %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        <div class="alert alert-success" role = "alert">
+                            {{message}}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}  
+
+
+			{% if user.is_superuser %}
+			    <li><a href="/admin/">Admin</a></li>
+			    <li><a href= "/crudapp/logout/">Log Out</a></li>
+			{% else %}
+				{% if user.is_authenticated %}
+                    <h4>You are Loged In</h4>
+					<li><a href= "/crudapp/logout/">Log Out</a></li>
+					<li><a href= "/crudapp/viewprofile/{{user.pk}}">view Profile</a></li>
+				{% else %}
+					<li><a href= "/crudapp/signin/">Log In</a></li>
+					<li><a href= "/crudapp/registers/">Sign Up</a></li>
+				{% endif %}
+			{% endif%}
+
+
+        {% endblock  %}
+    </body>
+</html>

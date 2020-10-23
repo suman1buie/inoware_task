@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% block content %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+    <h2>Sign Up Page</h2>
+    <form method="POST">
+        {% csrf_token %} 
+        <input class="pl" type="text" name="username" placeholder="Username.." required></br>
+        <input class="pl" type="text" name="first_name" placeholder="First Name.." required></br>
+        <input class="pl" type="text" name="last_name" placeholder="Last Name.." required></br>
+        <input class="pl" type="email" name="email" placeholder="Email Id .." required></br>
+        <input class="pl" type="password" name="password1" placeholder="Password.." required></br>
+        <input class="pl" type="password" name="password2" placeholder="Repeat your password.." required></br>
+        <input class="btn" type="submit" value="submit">
+    </form>    
+    <a href="../">back</a>
+{% endblock content %}

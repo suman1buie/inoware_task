@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Profile</h2>
+        {% if user.is_authenticated %}
+            <a href="/crudapp/editprofile/{{user.userprofile.id}}" class="linkk">Edit Profile</a>
+        {% endif %}  
+        <h4>Hello ,</h4> {{alldetail.name}}
+        <h5>Profile Image</h5>
+        <img src="/media/{{alldetail.profile_pic}}" alt=""/>
+        Email : <p style="color:blue;">{{alldetail.email}}</p>
+{% endblock content %}
